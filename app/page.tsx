@@ -361,7 +361,7 @@ export default function FamilyPhotoEvent() {
             <span className="hidden md:inline">|</span>
             <span>대표: 남유행</span>
             <span className="hidden md:inline">|</span>
-            <span>주소: 서울시 강남구 테헤란로 123</span>
+            <span>주소: 전라남도 순천시 조례동 1823-5</span>
           </div>
         </div>
       </footer>
