@@ -27,6 +27,7 @@ export default function FamilyPhotoEvent() {
     { id: "largefamily", label: "대가족사진 (6인 이상)" },
     { id: "remind", label: "리마인드웨딩" },
     { id: "longevity", label: "장수사진" },
+    { id: "70th", label: "칠순&팔순 상차림" },
   ]
 
   // 현재 연월을 기준으로 12개월 생성
@@ -356,9 +357,9 @@ export default function FamilyPhotoEvent() {
           <h3 className="text-2xl font-bold mb-4">Family Photo Studio</h3>
           <p className="text-gray-400 mb-6 text-lg">가족의 소중한 순간을 아름답게 담아드립니다</p>
           <div className="flex flex-col md:flex-row justify-center gap-4 text-sm text-gray-400">
-            <span>사업자등록번호: 123-45-67890</span>
+            <span>사업자등록번호: 416-10-35417</span>
             <span className="hidden md:inline">|</span>
-            <span>대표: 김사진</span>
+            <span>대표: 남유행</span>
             <span className="hidden md:inline">|</span>
             <span>주소: 서울시 강남구 테헤란로 123</span>
           </div>
