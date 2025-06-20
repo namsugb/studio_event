@@ -9,13 +9,28 @@ import { Label } from "@/components/ui/label"
 import { Calendar } from "lucide-react"
 import { createReservation } from "./actions"
 
+interface FormData {
+  name: string
+  phone: string
+  photoTypes: string[]
+  shootingMonth: string
+  privacyConsent: boolean
+  referralSources: string[]
+}
+
+interface MonthOption {
+  value: string
+  label: string
+}
+
 export default function FamilyPhotoEvent() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     phone: "",
-    photoTypes: [] as string[],
+    photoTypes: [],
     shootingMonth: "",
     privacyConsent: false,
+    referralSources: [],
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -30,12 +45,23 @@ export default function FamilyPhotoEvent() {
     { id: "70th", label: "칠순&팔순 상차림" },
   ]
 
+  const referralSourceOptions = [
+    { id: "naver", label: "네이버" },
+    { id: "blog", label: "블로그" },
+    { id: "instagram", label: "인스타그램" },
+    { id: "google", label: "구글" },
+    { id: "kakao", label: "카카오" },
+    { id: "daangn", label: "당근마켓" },
+    { id: "friend", label: "지인소개" },
+    { id: "banner", label: "현수막" },
+  ]
+
   // 현재 연월을 기준으로 12개월 생성
-  const monthOptions = useMemo(() => {
+  const monthOptions = useMemo((): MonthOption[] => {
     const now = new Date()
     const currentYear = now.getFullYear()
     const currentMonth = now.getMonth() // 0-11
-    const options = []
+    const options: MonthOption[] = []
 
     for (let i = 0; i < 12; i++) {
       const targetDate = new Date(currentYear, currentMonth + i, 1)
@@ -63,6 +89,7 @@ export default function FamilyPhotoEvent() {
         photo_types: formData.photoTypes,
         shooting_month: formData.shootingMonth,
         privacy_consent: formData.privacyConsent,
+        referral_sources: formData.referralSources,
       })
 
       if (result.success) {
@@ -77,6 +104,7 @@ export default function FamilyPhotoEvent() {
             photoTypes: [],
             shootingMonth: "",
             privacyConsent: false,
+            referralSources: [],
           })
         }, 3000)
       } else {
@@ -98,11 +126,20 @@ export default function FamilyPhotoEvent() {
   }
 
   const handlePhotoTypeChange = (photoType: string) => {
-    setFormData((prev) => ({
+    setFormData((prev: FormData) => ({
       ...prev,
       photoTypes: prev.photoTypes.includes(photoType)
-        ? prev.photoTypes.filter((type) => type !== photoType)
+        ? prev.photoTypes.filter((type: string) => type !== photoType)
         : [...prev.photoTypes, photoType],
+    }))
+  }
+
+  const handleReferralSourceChange = (source: string) => {
+    setFormData((prev: FormData) => ({
+      ...prev,
+      referralSources: prev.referralSources.includes(source)
+        ? prev.referralSources.filter((s: string) => s !== source)
+        : [...prev.referralSources, source],
     }))
   }
 
@@ -259,6 +296,27 @@ export default function FamilyPhotoEvent() {
                     {formData.photoTypes.length === 0 && (
                       <p className="text-sm text-red-500 mt-2">촬영 종류를 하나 이상 선택해주세요.</p>
                     )}
+                  </div>
+
+                  <div>
+                    <Label className="text-lg font-medium text-gray-700 mb-4 block">어떻게 알게 되셨나요? (중복 선택 가능)</Label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {referralSourceOptions.map((option) => (
+                        <div key={option.id} className="flex items-center gap-3">
+                          <input
+                            id={option.id}
+                            type="checkbox"
+                            checked={formData.referralSources.includes(option.id)}
+                            onChange={() => handleReferralSourceChange(option.id)}
+                            className="w-5 h-5 text-amber-600 border-2 border-gray-300 rounded focus:ring-amber-500"
+                            disabled={isSubmitting}
+                          />
+                          <Label htmlFor={option.id} className="text-sm text-gray-700 cursor-pointer">
+                            {option.label}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   <div>

@@ -27,5 +27,6 @@ export type StudioReservation = {
   photo_types: string[]
   shooting_month: string
   privacy_consent: boolean
+  referral_sources: string[]
   created_at?: string
 }

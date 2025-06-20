@@ -8,14 +8,14 @@ export async function createReservation(data: Omit<StudioReservation, "id" | "cr
     const supabase = getSupabase()
 
     const { data: reservation, error } = await supabase
-      .from("studio_reservation")
+      .from("reservations")
       .insert([
         {
           name: data.name,
           phone: data.phone,
-          photo_types: data.photo_types,
-          shooting_month: data.shooting_month,
-          privacy_consent: data.privacy_consent,
+          shooting_type: data.photo_types,
+          date: data.shooting_month,
+          referral_sources: data.referral_sources,
         },
       ])
       .select()
