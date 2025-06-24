@@ -38,11 +38,11 @@ export default function FamilyPhotoEvent() {
   const contactFormRef = useRef<HTMLDivElement>(null)
 
   const photoTypeOptions = [
-    { id: "family", label: "가족사진 (5인 이하)" },
-    { id: "largefamily", label: "대가족사진 (6인 이상)" },
-    { id: "remind", label: "리마인드웨딩" },
-    { id: "longevity", label: "장수사진" },
-    { id: "70th", label: "칠순&팔순 상차림" },
+    { id: "가족사진", label: "가족사진 (5인 이하)" },
+    { id: "대가족사진", label: "대가족사진 (6인 이상)" },
+    { id: "리마인드웨딩", label: "리마인드웨딩" },
+    { id: "장수사진", label: "장수사진" },
+    { id: "칠순&팔순 상차림", label: "칠순&팔순 상차림" },
   ]
 
   const referralSourceOptions = [
@@ -51,9 +51,7 @@ export default function FamilyPhotoEvent() {
     { id: "instagram", label: "인스타그램" },
     { id: "google", label: "구글" },
     { id: "kakao", label: "카카오" },
-    { id: "daangn", label: "당근마켓" },
     { id: "friend", label: "지인소개" },
-    { id: "banner", label: "현수막" },
   ]
 
   // 현재 연월을 기준으로 12개월 생성
